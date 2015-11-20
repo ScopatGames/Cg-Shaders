@@ -1,4 +1,4 @@
-﻿Shader "Custom/RadialColorRingsWithAngleMultiplyGradient" {
+﻿Shader "Custom/RadialColorRingWithMultiplyAngleGradient" {
 	Properties{
 		_Color01("Color01", Color) = (1,1,1,1)
 		_Color01Radius("Color01 Radius Location", Range(0.0, 1.0)) = 0.0
