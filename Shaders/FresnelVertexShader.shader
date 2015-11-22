@@ -2,7 +2,7 @@
 	Properties{
 		_Color("Main Color", Color) = (1,1,1,1)
 		_RimColor("Rim Color", Color) = (1,1,1,1)
-		_RimWidth("Rim Width", Range(0.0, 1.5)) = 0.5
+		_RimWidth("Rim Width", Range(0.0, 10.5)) = 0.5
 
 	}
 
