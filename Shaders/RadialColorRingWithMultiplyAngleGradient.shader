@@ -117,30 +117,37 @@
 					float radLoc04 = radians(_RadialLocation04);
 					float radLoc05 = radians(_RadialLocation05);
 					
+					float distanceFactor = (distance - _Color01Radius) / (_Color02Radius - _Color01Radius);
+
 					//Determine multiply factor
 					float angle = atan2(i.texcoord0.y,i.texcoord0.x);
-					if (angle < radLoc01) {
+					if (angle < radLoc01 && distance > _Color01Radius) {
 						baseColor = baseColor*_RadialMultiply01;
 					}
-					else if (angle < radLoc02) {
+					else if (angle < radLoc02 && distance > _Color01Radius) {
 						float radialFactor = (angle - radLoc01) / (radLoc02 - radLoc01);
-						baseColor = baseColor*lerp(_RadialMultiply01, _RadialMultiply02, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						float4 multiplyColor = lerp(_RadialMultiply01, _RadialMultiply02, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						baseColor = baseColor*lerp(float4(1.0,1.0,1.0,1.0),multiplyColor,float4(distanceFactor, distanceFactor, distanceFactor, 1.0));
 					}
-					else if (angle < radLoc03) {
+					else if (angle < radLoc03 && distance > _Color01Radius) {
 						float radialFactor = (angle - radLoc02) / (radLoc03 - radLoc02);
-						baseColor = baseColor*lerp(_RadialMultiply02, _RadialMultiply03, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						float4 multiplyColor = lerp(_RadialMultiply02, _RadialMultiply03, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						baseColor = baseColor*lerp(float4(1.0, 1.0, 1.0, 1.0), multiplyColor, float4(distanceFactor, distanceFactor, distanceFactor, 1.0));
 					}
-					else if (angle < radLoc04) {
+					else if (angle < radLoc04 && distance > _Color01Radius) {
 						float radialFactor = (angle - radLoc03) / (radLoc04 - radLoc03);
-						baseColor = baseColor*lerp(_RadialMultiply03, _RadialMultiply04, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						float4 multiplyColor = lerp(_RadialMultiply03, _RadialMultiply04, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						baseColor = baseColor*lerp(float4(1.0, 1.0, 1.0, 1.0), multiplyColor, float4(distanceFactor, distanceFactor, distanceFactor, 1.0));
 					}
-					else if (angle < radLoc05) {
+					else if (angle < radLoc05 && distance > _Color01Radius) {
 						float radialFactor = (angle - radLoc04) / (radLoc05 - radLoc04);
-						baseColor = baseColor*lerp(_RadialMultiply04, _RadialMultiply05, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						float4 multiplyColor = lerp(_RadialMultiply04, _RadialMultiply05, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						baseColor = baseColor*lerp(float4(1.0, 1.0, 1.0, 1.0), multiplyColor, float4(distanceFactor, distanceFactor, distanceFactor, 1.0));
 					}
-					else {
+					else if (distance > _Color01Radius){
 						float radialFactor = (angle - radLoc05) / (radLoc01 - radLoc05);
-						baseColor = baseColor*lerp(_RadialMultiply05, _RadialMultiply01, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						float4 multiplyColor = lerp(_RadialMultiply05, _RadialMultiply01, float4(radialFactor, radialFactor, radialFactor, 1.0));
+						baseColor = baseColor*lerp(float4(1.0, 1.0, 1.0, 1.0), multiplyColor, float4(distanceFactor, distanceFactor, distanceFactor, 1.0));
 					}
 					return baseColor;
 				}
